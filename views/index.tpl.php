@@ -9,7 +9,7 @@
                             <img src="<?= $value['preview']?>" alt="" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="/episode/<?=$key + 1?>" class="link-offset-2 link-underline link-underline-opacity-0 text-white">
+                                    <a href="/episode/<?=$key + 1?>" class="link-offset-2 link-underline link-underline-opacity-0 link-body-emphasis">
                                         <?= "Episode " . $key + 1 ?>
                                     </a>
                                 </h5>
