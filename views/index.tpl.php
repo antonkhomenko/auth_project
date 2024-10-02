@@ -8,7 +8,11 @@
                         <div class="card">
                             <img src="<?= $value['preview']?>" alt="" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title">Episode <?=$key + 1?></h5>
+                                <h5 class="card-title">
+                                    <a href="/episode/<?=$key + 1?>" class="link-offset-2 link-underline link-underline-opacity-0 text-white">
+                                        <?= "Episode " . $key + 1 ?>
+                                    </a>
+                                </h5>
                                 <a href="/episode/<?=$key + 1?>" class="btn btn-primary w-100">Watch</a>
                             </div>
                         </div>
@@ -18,5 +22,3 @@
         </div>
     </div>
 <?php include VIEWS . "/footer.tpl.php"; ?>
-
-
