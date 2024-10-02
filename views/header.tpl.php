@@ -1,3 +1,11 @@
+<?php
+	$active_uri = strtok($_SERVER['REQUEST_URI'], "?");
+    $navbar = array(
+            "/login" => 'Login',
+        	'/register' => 'Registration',
+        	'/secret' => 'Secret page'
+    );
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="dark" style="min-height: 100vh">
 <head>
@@ -10,19 +18,18 @@
 </head>
 <body class="d-flex flex-column" style="min-height: 100vh">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-	<div class="container">
+	<div class="container-lg">
 		<a class="navbar-brand fw-semibold" href="/">Home</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link" href="/login">Login</a>
-				</li>
-				<li class="nav-item">
-					<a href="/registration" class="nav-link">Registration</a>
-				</li>
+                <?php foreach($navbar as $key => $value): ?>
+                	<li class="nav-item">
+                        <a href="<?= $key ?>" class="nav-link <?= ($key == $active_uri) ? 'active' : '' ?>"><?= $value ?></a>
+                    </li>
+                <?php endforeach; ?>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Dropdown

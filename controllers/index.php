@@ -1,10 +1,7 @@
 <?php
 
+global $anime_data;
 
 
 
-require_once VIEWS . "/index.tpl.php";
-
-
-
-
+include VIEWS . "/index.tpl.php";

@@ -1,3 +1,3 @@
 <?php
 
-print "Test from login.php";
+include VIEWS . "/login.tpl.php";
