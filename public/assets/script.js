@@ -4,7 +4,10 @@ const themeModeImg = themeModeBtn.firstElementChild;
 const rootElement = document.getElementsByTagName("html")[0];
 
 const themes = ['dark', 'light'];
-const modeBtnImgs = ['/assets/imgs/dark_mode.svg', '/assets/imgs/light_mode.svg']
+const modeBtnImgs = ['/assets/imgs/dark_mode.svg', '/assets/imgs/light_mode.svg'];
+
+
+
 
 themeModeBtn.addEventListener("click", (event) => {
     const currentTheme = rootElement.getAttribute("data-bs-theme");

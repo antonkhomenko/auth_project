@@ -1,0 +1,36 @@
+
+#video-container {
+    position: relative;
+    height: 50vh;
+    min-height: 590px;
+    background: black;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    /*margin: auto 0;*/
+    height: 98%;
+    width: 100%;
+    border-radius: inherit;
+}
+
+@media only screen and (max-width: 992px) {
+    #video-container {
+        /*height: 350px;*/
+        height: 40vh;
+        min-height: 350px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+   #video-container {
+       /*height: 250px;*/
+       height: 30vh;
+       min-height: 250px;
+   }
+}

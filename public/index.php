@@ -14,6 +14,8 @@ try {
 } catch (Exception $e) {
 	die("can not register new router method: \"{$e->getMessage()}\"");
 }
+
+
 $router->match();
 
 
