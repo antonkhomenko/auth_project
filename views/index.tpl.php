@@ -7,7 +7,7 @@
 	            foreach(array_slice($anime_data, $offset, $episodes_per_page) as $key => $value): ?>
                     <div class="p-3">
                         <div class="card">
-                            <img src="<?= $value['preview']?>" alt="" class="card-img-top">
+                            <img src="<?= $value['preview']?>" alt="episode-preview" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <a href="/episode/<?=$offset + $key + 1?>" class="link-offset-2 link-underline link-underline-opacity-0 link-body-emphasis">
