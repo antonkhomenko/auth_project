@@ -103,7 +103,7 @@ $anime_data = array(
 		"preview" => "/assets/previews/episode25.webp"
 	],
 	[
-		"url" => "https://r400601.anilibria.one/cowboy-bebop/26.1080.d1c4d14fe5453c69.mp4?hash1=f515e4c5a27fadc4e05f33ad288eba9c&hash2=a01eb2a7c2ab504e7f52f96e25c6c9a9",
+		"url" => "blob:https://alloha.yani.tv/45649113-b141-4d35-bf4d-c565539cebb2",
 		"preview" => "/assets/previews/episode26.webp"
 	]
 );
