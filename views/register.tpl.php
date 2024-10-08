@@ -35,7 +35,7 @@
                         <option value="custom_mode">Choose from file</option>
                     </select>
                 </div>
-                <div class="d-flex justify-content-between px-2" id="default_avatar_selector">
+                <div class="d-flex justify-content-between px-2 mt-2" id="default_avatar_selector">
                     <div class="default_avatar_container">
                         <input type="radio" class="btn-check" name="avatar" value="profile-pic1.svg" autocomplete="off" id="default_avatar1">
                         <label for="default_avatar1" class="default_avatar_label bg-secondary-subtle">
