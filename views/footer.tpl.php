@@ -1,5 +1,5 @@
-<footer class="container-fluid" id="footer">
-	<div class="container-lg py-3 d-flex justify-content-center align-items-center">
+<footer class="container-fluid bg-body-tertiary">
+	<div class="container-lg py-2 d-flex justify-content-center align-items-center">
 		<p class="text-center m-0 py-2">All right reserved &copy; <?= date("Y") ?></p>
 	</div>
 </footer>

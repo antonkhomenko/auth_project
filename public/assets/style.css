@@ -110,16 +110,15 @@ body {
     border-color: var(--bs-border-color);
 }
 
+
+
+
 @media only screen and (max-width: 992px) {
     #video-container {
         /*height: 350px;*/
         height: 40vh;
         min-height: 350px;
     }
-}
-
-#footer {
-    border-top: 1px solid darkgray;
 }
 
 @media only screen and (max-width: 576px) {
