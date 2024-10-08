@@ -103,7 +103,7 @@ $anime_data = array(
 		"preview" => "/assets/previews/episode25.webp"
 	],
 	[
-		"url" => "blob:https://alloha.yani.tv/45649113-b141-4d35-bf4d-c565539cebb2",
+		"url" => "https://ashdi.vip/vod/12",
 		"preview" => "/assets/previews/episode26.webp"
 	]
 );

@@ -12,8 +12,6 @@ const passwordModeBtn = Array.from(document.getElementsByClassName("password-mod
 const passwordInput = Array.from(document.getElementsByClassName("password-input"));
 
 if (passwordModeBtn.length > 0) {
-
-
     //
     passwordModeBtn.forEach((e) => {
         if (e.previousElementSibling.type === 'password') {

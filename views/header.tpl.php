@@ -18,7 +18,7 @@ $default_mode = $_COOKIE['mode'] ?? 'dark';
 	<meta name="viewport"
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>AniNeko<?= isset($title) ? " • $title" : "" ?></title>
+	<title>ApartFinder<?= isset($title) ? " • $title" : "" ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/style.css">
     <link rel="icon" type="image/x-icon" href="/assets/imgs/favicon.svg">
@@ -26,9 +26,9 @@ $default_mode = $_COOKIE['mode'] ?? 'dark';
 <body class="d-flex flex-column bg-body-secondary" style="min-height: 100vh">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container-lg">
-		<a class="navbar-brand fw-semibold d-flex" href="/">
+		<a class="navbar-brand fw-semibold d-flex gap-1" href="/">
             <img src="/assets/imgs/favicon.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            AniNeko
+            ApartFinder
         </a>
         <button class="border-0 ms-auto bg-body-secondary d-flex justify-content-center align-items-center p-2 rounded-circle" style="margin-right: 10px" id="themeModeBtn">
             <img src="/assets/imgs/<?=$default_mode?>_mode.svg" alt="mode" width="18px">

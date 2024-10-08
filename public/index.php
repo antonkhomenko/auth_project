@@ -13,6 +13,7 @@ try {
 	$router->get("/register", "register.php");
 	$router->get("error_page", "error.php");
 	$router->post("/register", "registerPost.php");
+	$router->post("/login", "loginPost.php");
 } catch (Exception $e) {
 	die("can not register new router method: \"{$e->getMessage()}\"");
 }
