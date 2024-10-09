@@ -4,10 +4,11 @@
 [$input, $error] = validate_form();
 
 
-
 if ($error) {
 	$default_values = $input;
 	require VIEWS . "/register.tpl.php";
+} else {
+	var_dump($input);
 }
 
 
@@ -17,6 +18,7 @@ function validate_form(): array
 	$error = array();
 	$target_dir = SITE_ROOT . "/public/assets/profile-pics/";
 
+
 	$input['username'] = trim($_POST['username'] ?? '');
 	if ($input['username'] == "") {
 		$error['username'] = "Username is required";
@@ -25,16 +27,18 @@ function validate_form(): array
 	if ($input['email'] == null or $input['email'] === false) {
 		$error['email'] = 'Email is required';
 	}
-	if (isset($_POST['avatar'])) {
+	if ($_POST['avatar_mode_selector'] === 'default_mode') {
 		$target_file = "/assets/profile-pics/" . $_POST['avatar'];
 		$input['avatar'] = $target_file;
-	} else if ($_FILES['avatar']['error'] === 0) {
+	} else if (($_POST['avatar_mode_selector'] === 'custom_mode') && $_FILES['avatar']['error'] === 0) {
 		$target_file = $target_dir . basename($_FILES['avatar']['name']);
 		if (!move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file)) {
 			die("can not upload file");
 		}
 		chmod($target_file, 0666);
-		$input['avatar'] = $target_file;
+		$input['avatar'] = "/assets/profile-pics/" . basename($_FILES['avatar']['name']);
+	} else if ($_POST['avatar_mode_selector'] === 'custom_mode' && isset($_POST['prev_avatar']) && $_FILES['avatar']['error'] != 0) {
+		$input['avatar'] = $_POST['prev_avatar'];
 	} else {
 		$error['avatar'] = 'Profile pic is required';
 	}

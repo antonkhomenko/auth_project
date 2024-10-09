@@ -1,5 +1,20 @@
 <?php
-    include VIEWS . "/header.tpl.php";
+include VIEWS . "/header.tpl.php";
+
+$profile_pics_data = array(
+	"profile-pic1.svg" => "/assets/profile-pics/profile-pic1.svg",
+	"profile-pic2.svg" => "/assets/profile-pics/profile-pic2.svg",
+	"profile-pic3.svg" => "/assets/profile-pics/profile-pic3.svg",
+	"profile-pic4.svg" => "/assets/profile-pics/profile-pic4.svg",
+);
+
+$avatar_mode = array(
+	'default_mode' => 'Choose from standard',
+	'custom_mode' => 'Choose from file',
+);
+
+//print basename($default_values['avatar']);
+
 ?>
 <div class="flex-grow-1">
 	<div class="container-lg">
@@ -31,37 +46,35 @@
                 <div class="input-group <?= isset($error['avatar']) ? 'is-invalid' : '' ?>" aria-describedby="avatarFeedback">
                     <span class="input-group-text">Choose your profile picture</span>
                     <select id="avatar_mode_selector" class="form-select form-select-sm" name="avatar_mode_selector">
-                        <option value="default_mode" >Choose from standard</option>
-                        <option value="custom_mode">Choose from file</option>
+                        <?php foreach($avatar_mode as $mode => $title): ?>
+                            <option
+                                    value="<?= $mode ?>"
+                                    <?= (isset($default_values['avatar_mode_selector']) and $default_values['avatar_mode_selector'] == $mode) ? 'selected' : '' ?>
+                            ><?= $title ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="d-flex justify-content-between px-2 mt-2" id="default_avatar_selector">
-                    <div class="default_avatar_container">
-                        <input type="radio" class="btn-check" name="avatar" value="profile-pic1.svg" autocomplete="off" id="default_avatar1">
-                        <label for="default_avatar1" class="default_avatar_label bg-secondary-subtle">
-                            <img src="/assets/profile-pics/profile-pic1.svg" alt="profile-pic" class="default_avatar_img">
-                        </label>
-                    </div>
-                    <div class="default_avatar_container">
-                        <input type="radio" class="btn-check" name="avatar" value="profile-pic2.svg" autocomplete="off" id="default_avatar2">
-                        <label for="default_avatar2" class="default_avatar_label bg-secondary-subtle">
-                            <img src="/assets/profile-pics/profile-pic2.svg" alt="profile-pic" class="default_avatar_img">
-                        </label>
-                    </div>
-                    <div class="default_avatar_container">
-                        <input type="radio" class="btn-check" name="avatar" value="profile-pic3.svg" autocomplete="off" id="default_avatar3">
-                        <label for="default_avatar3" class="default_avatar_label bg-secondary-subtle">
-                            <img src="/assets/profile-pics/profile-pic3.svg" alt="profile-pic" class="default_avatar_img">
-                        </label>
-                    </div>
-                    <div class="default_avatar_container">
-                        <input type="radio" class="btn-check" name="avatar" value="profile-pic4.svg" autocomplete="off" id="default_avatar4">
-                        <label for="default_avatar4" class="default_avatar_label bg-secondary-subtle">
-                            <img src="/assets/profile-pics/profile-pic4.svg" alt="profile-pic" class="default_avatar_img">
-                        </label>
-                    </div>
+                    <?php $i = 1; foreach($profile_pics_data as $key => $value): ?>
+                        <div class="default_avatar_container">
+                            <?php if (isset($default_values['avatar']) and $default_values['avatar'] == $value ): ?>
+                                <input type="radio" class="btn-check" name="avatar" value="<?= $key; ?>" autocomplete="off" id="<?= "default-avatar" . $i ?>" checked>
+                            <?php else: ?>
+                                <input type="radio" class="btn-check" name="avatar" value="<?= $key; ?>" autocomplete="off" id="<?= "default-avatar" . $i ?>">
+                            <?php endif; ?>
+                            <label for="<?= "default-avatar" . $i++ ?>" class="default_avatar_label bg-secondary-subtle">
+                                <img src="<?= $value; ?>" alt="profile-pic" class="default_avatar_img">
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
                 <input type="file" class="form-control" id="custom_avatar" name="avatar" style="display: none">
+	            <?php if (isset($default_values['avatar']) and $default_values['avatar_mode_selector'] === 'custom_mode'): ?>
+                    <div class="custom-profile-pic">
+                        <img src="<?= "/assets/profile-pics/" . basename($default_values['avatar']); ?>" alt="profile-pic">
+                    </div>
+                    <input type="hidden" value="<?= "/assets/profile-pics/" . basename($default_values['avatar']) ?>" name="prev_avatar">
+	            <?php endif; ?>
                 <div class="invalid-feedback" id="avatarFeedback">
                     <?= $error['avatar'] ?>
                 </div>

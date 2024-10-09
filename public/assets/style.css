@@ -88,7 +88,27 @@ body {
     box-shadow: 0 0 0 .25rem rgba(var(--bs-success-rgb), .25) !important;
 }
 
+.custom-profile-pic {
+    border: 4px solid var(--bs-primary);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    width: 63px;
+    height: 63px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
 
+.custom-profile-pic > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    height: auto;
+    width: 100%;
+}
 
 #video-container {
     position: relative;
