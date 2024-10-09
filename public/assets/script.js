@@ -11,7 +11,43 @@ const avatarModeSelector = document.getElementById("avatar_mode_selector");
 const passwordModeBtn = Array.from(document.getElementsByClassName("password-mode-btn"));
 const passwordInput = Array.from(document.getElementsByClassName("password-input"));
 const passwordConfirmationInput = document.getElementById("passwordConfirmation");
+const registerBtn = document.getElementById("register-btn");
 
+if (registerBtn !== null) {
+    registerBtn.addEventListener("click", (e) => {
+        if (passwordConfirmationInput.value !== passwordInput[0].value) {
+            e.preventDefault();
+        }
+    });
+    passwordInput[0].addEventListener('input', (e) => {
+        if (e.target.value === passwordConfirmationInput.value && e.target.value !== "") {
+            passwordConfirmationInput.parentElement.classList.add("password-container-valid");
+        }
+        if (e.target.value !== passwordConfirmationInput.value ) {
+            passwordConfirmationInput.parentElement.classList.remove("password-container-valid");
+            passwordConfirmationInput.parentElement.classList.add("password-container-invalid");
+        }
+        if (e.target.value === "" && passwordConfirmationInput.value === "") {
+            passwordConfirmationInput.parentElement.classList.remove("password-container-invalid");
+            passwordConfirmationInput.parentElement.classList.remove("password-container-valid");
+        }
+    });
+
+    passwordConfirmationInput.addEventListener("input", (e) => {
+        if (e.target.value !== passwordInput[0].value) {
+            e.target.parentElement.classList.remove("password-container-valid");
+            e.target.parentElement.classList.add("password-container-invalid");
+        }
+        if (e.target.value === passwordInput[0].value && e.target.value !== "") {
+            e.target.parentElement.classList.remove("password-container-invalid");
+            e.target.parentElement.classList.add("password-container-valid");
+        }
+        if (e.target.value === "" && passwordInput[0].value === "") {
+            e.target.parentElement.classList.remove("password-container-invalid");
+            e.target.parentElement.classList.remove("password-container-valid");
+        }
+    });
+}
 
 
 if (passwordModeBtn.length > 0) {
@@ -37,34 +73,6 @@ if (passwordModeBtn.length > 0) {
                 e.children[1].style.display = "none";
             }
         });
-    });
-
-    passwordInput[0].addEventListener('input', (e) => {
-        if (e.target.value === passwordConfirmationInput.value && e.target.value !== "") {
-            passwordConfirmationInput.parentElement.classList.add("password-container-valid");
-        }
-        if (e.target.value !== passwordConfirmationInput.value && passwordConfirmationInput.parentElement.classList.contains("password-container-valid")) {
-            passwordConfirmationInput.parentElement.classList.remove("password-container-valid");
-        }
-        if (e.target.value === "" && passwordConfirmationInput.value === "") {
-            passwordConfirmationInput.parentElement.classList.remove("password-container-invalid");
-            passwordConfirmationInput.parentElement.classList.remove("password-container-valid");
-        }
-    });
-
-    passwordConfirmationInput.addEventListener("input", (e) => {
-        if (e.target.value !== passwordInput[0].value) {
-            e.target.parentElement.classList.remove("password-container-valid");
-            e.target.parentElement.classList.add("password-container-invalid");
-        }
-        if (e.target.value === passwordInput[0].value && e.target.value !== "") {
-            e.target.parentElement.classList.remove("password-container-invalid");
-            e.target.parentElement.classList.add("password-container-valid");
-        }
-        if (e.target.value === "" && passwordInput[0].value === "") {
-            e.target.parentElement.classList.remove("password-container-invalid");
-            e.target.parentElement.classList.remove("password-container-valid");
-        }
     });
 }
 

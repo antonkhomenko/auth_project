@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary col-12">Register</button>
+            <button type="submit" class="btn btn-primary col-12" id="register-btn">Register</button>
         </form>
 	</div>
 </div>
