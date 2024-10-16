@@ -1,5 +1,9 @@
 <?php
-include VIEWS . "/header.tpl.php";
+include VIEWS . "/incs/header.tpl.php";
+
+/**
+ * @var array $default_values;
+ */
 
 $profile_pics_data = array(
 	"profile-pic1.svg" => "/assets/profile-pics/profile-pic1.svg",
@@ -13,11 +17,15 @@ $avatar_mode = array(
 	'custom_mode' => 'Choose from file',
 );
 
-//print basename($default_values['avatar']);
-
 ?>
 <div class="flex-grow-1">
 	<div class="container-lg">
+        <?php
+            if(isset($_SESSION['register_error'])) {
+                require VIEWS . "/incs/alert_danger.tpl.php";
+                unset($_SESSION['register_error']);
+            }
+        ?>
         <form class="col-lg-6 offset-lg-3 py-4" method="post" enctype="multipart/form-data" action="/register">
             <h1 class="py-3 fw-semibold">Registration</h1>
             <div class="mb-3">
@@ -25,7 +33,7 @@ $avatar_mode = array(
                 <input
                         type="text" class="form-control <?= isset($error['username']) ? 'is-invalid' : '' ?>" id="username"
                         name="username" aria-describedby="usernameFeedback" placeholder="Enter your username"
-                        value="<?= $default_values['username'] ?? '' ?>"
+                        value="<?= isset($default_values['username']) ? h($default_values['username']) : ''; ?>"
                 >
                 <div class="invalid-feedback" id="usernameFeedback">
                     <?= $error['username']; ?>
@@ -36,7 +44,7 @@ $avatar_mode = array(
                 <input
                         type="email" class="form-control <?= isset($error['email']) ? 'is-invalid' : '' ?>"
                         id="email" name="email" aria-describedby="emailHelp" placeholder="Enter your email"
-                        value="<?= $default_values['email'] ?? '' ?>"
+                        value="<?= isset($default_values['email']) ? h($default_values['email']) : ''; ?>"
                 >
                 <div id="emailHelp" class="<?= isset($error['email']) ? "invalid-feedback" : "form-text" ?>">
                     <?= $error['email'] ?? "We'll never share your email with anyone else." ?>
@@ -69,12 +77,16 @@ $avatar_mode = array(
                     <?php endforeach; ?>
                 </div>
                 <input type="file" class="form-control" id="custom_avatar" name="avatar" style="display: none">
+
+<!--                Prev_avatar-->
 	            <?php if (isset($default_values['avatar']) and $default_values['avatar_mode_selector'] === 'custom_mode'): ?>
                     <div class="custom-profile-pic">
-                        <img src="<?= "/assets/profile-pics/" . basename($default_values['avatar']); ?>" alt="profile-pic">
+                        <img src="<?= "/assets/profile-pics/custom_mode/" . basename($default_values['avatar']); ?>" alt="profile-pic">
                     </div>
-                    <input type="hidden" value="<?= "/assets/profile-pics/" . basename($default_values['avatar']) ?>" name="prev_avatar">
+                    <input type="hidden" value="<?= "/assets/profile-pics/custom_mode/" . basename($default_values['avatar']) ?>" name="prev_avatar">
 	            <?php endif; ?>
+<!--                End of prev_avatar-->
+
                 <div class="invalid-feedback" id="avatarFeedback">
                     <?= $error['avatar'] ?>
                 </div>
@@ -105,9 +117,10 @@ $avatar_mode = array(
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary col-12" id="register-btn">Register</button>
+            <button type="submit" class="btn btn-primary col-12 mb-3" id="register-btn">Register</button>
+            <p class="text-end"><a href="/login" >Already have an account</a></p>
         </form>
 	</div>
 </div>
 
-<?php include VIEWS . "/footer.tpl.php"; ?>
+<?php include VIEWS . "/incs/footer.tpl.php"; ?>

@@ -1,4 +1,4 @@
-<?php include VIEWS . "/header.tpl.php"; ?>
+<?php include VIEWS . "/incs/header.tpl.php"; ?>
     <div class="flex-grow-1">
         <div class="container-lg py-3">
             <div class="<?="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4"?>">
@@ -39,4 +39,4 @@
             <?php endif; ?>
         </div>
     </div>
-<?php include VIEWS . "/footer.tpl.php"; ?>
+<?php include VIEWS . "/incs/footer.tpl.php"; ?>

@@ -1,23 +1,34 @@
 <?php
 
 
+global $db;
 [$input, $error] = validate_form();
-
+$default_values = $input;
 
 if ($error) {
-	$default_values = $input;
 	require VIEWS . "/register.tpl.php";
 } else {
-	var_dump($input);
+	try {
+		$db->register($input);
+		$_SESSION['register_ok'] = "User " . h($input['username']) . " was successfully register";
+		redirect("/login");
+	} catch (PDOException $e) {
+		if ($e->getCode() == 23000) {
+			$_SESSION['register_error'] = "This email is already used";
+			require VIEWS . "/register.tpl.php";
+		} else {
+			http_response_code(401);
+			redirect("/error");
+		}
+	}
 }
+
 
 
 function validate_form(): array
 {
 	$input = array();
 	$error = array();
-	$target_dir = SITE_ROOT . "/public/assets/profile-pics/";
-
 
 	$input['username'] = trim($_POST['username'] ?? '');
 	if ($input['username'] == "") {
@@ -27,22 +38,16 @@ function validate_form(): array
 	if ($input['email'] == null or $input['email'] === false) {
 		$error['email'] = 'Email is required';
 	}
-	if ($_POST['avatar_mode_selector'] === 'default_mode') {
-		$target_file = "/assets/profile-pics/" . $_POST['avatar'];
-		$input['avatar'] = $target_file;
-	} else if (($_POST['avatar_mode_selector'] === 'custom_mode') && $_FILES['avatar']['error'] === 0) {
-		$target_file = $target_dir . basename($_FILES['avatar']['name']);
-		if (!move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file)) {
-			die("can not upload file");
+	try {
+		$avatar_res = avatar_validation($input);
+		if (!$avatar_res) {
+			$error['avatar'] = 'Profile picture is required';
 		}
-		chmod($target_file, 0666);
-		$input['avatar'] = "/assets/profile-pics/" . basename($_FILES['avatar']['name']);
-	} else if ($_POST['avatar_mode_selector'] === 'custom_mode' && isset($_POST['prev_avatar']) && $_FILES['avatar']['error'] != 0) {
-		$input['avatar'] = $_POST['prev_avatar'];
-	} else {
-		$error['avatar'] = 'Profile pic is required';
+	} catch (Exception $exception) {
+		http_response_code(500);
+		require_once VIEWS . "/register.tpl.php";
+		exit;
 	}
-
 	$input['password'] = trim($_POST['password'] ?? "");
 	if ($input['password'] == '' or strlen($input['password']) < 5) {
 		$error['password'] = "Password is required and should be at least 5 character";
@@ -51,6 +56,35 @@ function validate_form(): array
 	return [$input, $error];
 }
 
+function avatar_validation(array &$input): bool
+{
+	switch ($_POST['avatar_mode_selector']) {
+		case 'default_mode':
+			if (!isset($_POST['avatar'])) {
+				return false;
+			}
+			$input['avatar'] = "/assets/profile-pics/{$_POST['avatar']}";
+			return true;
+		case 'custom_mode':
+			if ($_FILES['avatar']['error'] === 0) {
+				$new_name = uniqid() . "." . pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+				$move_to = SITE_ROOT . "/public/assets/profile-pics/custom_mode/$new_name";
+				if (!move_uploaded_file($_FILES['avatar']['tmp_name'], $move_to)) {
+					throw new Exception("can not move file {$_FILES['avatar']['tmp_name']} to $move_to");
+				}
+				chmod($move_to, 0666);
+				$input['avatar'] = "/assets/profile-pics/custom_mode/$new_name";
+				return true;
+			} else if (isset($_POST['prev_avatar'])) {
+				$input['avatar'] = $_POST['prev_avatar'];
+				return true;
+			} else {
+				return false;
+			}
+		default:
+			return false;
+	}
+}
 
 
 

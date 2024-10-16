@@ -1,4 +1,4 @@
-<?php include VIEWS . "/header.tpl.php"; ?>
+<?php include VIEWS . "/incs/header.tpl.php"; ?>
 
 <div class="flex-grow-1">
 	<div class="container py-5">
@@ -11,4 +11,4 @@
 </div>
 
 
-<?php include VIEWS . "/footer.tpl.php"; ?>
+<?php include VIEWS . "/incs/footer.tpl.php"; ?>

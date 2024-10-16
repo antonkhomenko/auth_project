@@ -1,12 +1,17 @@
-<?php include VIEWS . "/header.tpl.php"; ?>
-
+<?php include VIEWS . "/incs/header.tpl.php"; ?>
 <div class="flex-grow-1">
 	<div class="container-lg">
+		<?php
+		if (isset($_SESSION['register_ok'])) {
+			require VIEWS . "/incs/alert_success.tpl.php";
+			unset($_SESSION['register_ok']);
+		}
+		?>
         <form class="col-lg-6 offset-lg-3 py-4" method="post" action="/login">
             <h1 class="py-3 fw-semibold">Login into account</h1>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter your email">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter your email" autocomplete="email">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
@@ -30,4 +35,4 @@
 	</div>
 </div>
 
-<?php include VIEWS . "/footer.tpl.php"; ?>
+<?php include VIEWS . "/incs/footer.tpl.php"; ?>

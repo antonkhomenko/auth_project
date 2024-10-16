@@ -1,2 +1,4 @@
 .idea/
-
+vendor
+.env
+public/assets/profile-pics/custom_mode

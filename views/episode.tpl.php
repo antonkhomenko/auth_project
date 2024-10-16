@@ -3,7 +3,7 @@
  * @var int $episode_number;
  * @var array $anime_data;
  */
-include VIEWS . "/header.tpl.php"; ?>
+include VIEWS . "/incs/header.tpl.php"; ?>
 
 <div class="flex-grow-1 d-flex flex-column">
     <div class="container-lg pt-5 pt-sm-0">
@@ -29,4 +29,4 @@ include VIEWS . "/header.tpl.php"; ?>
     </div>
 </div>
 
-<?php include VIEWS . "/footer.tpl.php"; ?>
+<?php include VIEWS . "/incs/footer.tpl.php"; ?>
