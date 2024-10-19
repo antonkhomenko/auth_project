@@ -1,5 +1,44 @@
+:root {
+    --bg-hover: rgb(56 56 56/ 1 );
+    --bg-body: #161719;
+}
+
+[data-bs-theme="light"] {
+    --bg-hover: #EBEBEB;
+    --bg-body: #fff;
+}
+
 body {
     box-sizing: border-box;
+    min-width: 344px;
+    background: var(--bg-body);
+}
+
+.or {
+    -webkit-box-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 5px 0px !important;
+    white-space: nowrap !important;
+    color: gray;
+}
+
+.or:before {
+    content: "" !important;
+    display: block !important;
+    width: 100% !important;
+    height: 1px !important;
+    background-color: gray !important;
+    margin-right: 5px !important;
+}
+
+.or:after {
+    content: "" !important;
+    display: block !important;
+    width: 100% !important;
+    height: 1px !important;
+    background-color: gray !important;
+    margin-left: 5px !important;
 }
 
 .password-container {
@@ -88,6 +127,27 @@ body {
     box-shadow: 0 0 0 .25rem rgba(var(--bs-success-rgb), .25) !important;
 }
 
+.user-dropdown {
+    border: 1px solid var(--bs-border-color-translucent);
+    padding: 5px 10px;
+    /*border-radius: var(--bs-border-radius);*/
+    border-radius: 20px;
+    /*background: var(--bs-body-bg);*/
+    background: var(--bg-body);
+    margin-left: 10px;
+}
+
+.user-dropdown:hover {
+    /*background: var(--bg-hover);*/
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    cursor: pointer;
+}
+
+#dropdown-item-user {
+    display: flex;
+    align-items: center;
+}
+
 .custom-profile-pic {
     border: 4px solid var(--bs-primary);
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
@@ -97,6 +157,18 @@ body {
     position: relative;
     overflow: hidden;
     margin: 0 auto;
+}
+
+.nav-profile-pic {
+    width: 30px;
+    height: 30px;
+    /*border: 1px solid var(--bs-primary);*/
+    border: none;
+    margin-right: 10px;
+}
+
+.nav-profile-pic > img {
+    height: 100% !important;
 }
 
 .custom-profile-pic > img {
@@ -166,8 +238,15 @@ body {
 
 
 
+@media only screen and (min-width: 992px) {
+    #navbarSupportedContent {
+        display: none !important;
+    }
+}
+
 
 @media only screen and (max-width: 992px) {
+
     #video-container {
         /*height: 350px;*/
         height: 40vh;
@@ -176,9 +255,16 @@ body {
 }
 
 @media only screen and (max-width: 576px) {
+   html {
+       font-size: 12px;
+   }
    #video-container {
        /*height: 250px;*/
        height: 30vh;
        min-height: 250px;
+   }
+
+   .nav-profile-pic {
+       margin-right: 0;
    }
 }

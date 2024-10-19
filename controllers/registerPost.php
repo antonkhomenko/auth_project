@@ -10,11 +10,11 @@ if ($error) {
 } else {
 	try {
 		$db->register($input);
-		$_SESSION['register_ok'] = "User " . h($input['username']) . " was successfully register";
+		$_SESSION['success'] = "User " . h($input['username']) . " was successfully register";
 		redirect("/login");
 	} catch (PDOException $e) {
 		if ($e->getCode() == 23000) {
-			$_SESSION['register_error'] = "This email is already used";
+			$_SESSION['error'] = "This email is already used";
 			require VIEWS . "/register.tpl.php";
 		} else {
 			http_response_code(401);

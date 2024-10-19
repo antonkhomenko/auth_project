@@ -1,4 +1,4 @@
-<footer class="container-fluid bg-body-tertiary">
+<footer class="container-fluid" style="border-top: 1px solid gray">
 	<div class="container-lg py-2 d-flex justify-content-center align-items-center">
 		<p class="text-center m-0 py-2">All right reserved &copy; <?= date("Y") ?></p>
 	</div>

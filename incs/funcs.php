@@ -17,6 +17,11 @@ function load(array $fillable, bool $post = true): array
 	return $data;
 }
 
+function check_auth(): bool
+{
+	return isset($_SESSION['user']);
+}
+
 function redirect(string $url = ''): never
 {
 	if ($url === '') {
@@ -34,14 +39,13 @@ function h(string $data): string
 
 function get_alert(): void
 {
-	if (isset($_SESSION['register_ok'])) {
+	if (isset($_SESSION["success"])) {
 		require VIEWS . "/incs/alert_success.tpl.php";
-		unset($_SESSION['register_ok']);
-		return;
+		unset($_SESSION['success']);
 	}
-	if (isset($_SESSION['register_error'])) {
+
+	if (isset($_SESSION["error"])) {
 		require VIEWS . "/incs/alert_danger.tpl.php";
-		unset($_SESSION['register_error']);
-		return;
+		unset($_SESSION['error']);
 	}
 }

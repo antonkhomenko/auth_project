@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var string $title ;
  */
@@ -6,8 +7,15 @@ $active_uri = strtok($_SERVER['REQUEST_URI'], "?");
 $navbar = array(
 	"/login" => 'Login',
 	'/register' => 'Registration',
-	'/secret' => 'Secret page'
+	'/secret' => 'FAQ'
 );
+
+$user_navbar = array(
+        "/favorites" => "✧ Favorites",
+);
+if (check_auth()) {
+    $navbar = $user_navbar;
+}
 
 $default_mode = $_COOKIE['mode'] ?? 'dark';
 ?>
@@ -23,42 +31,57 @@ $default_mode = $_COOKIE['mode'] ?? 'dark';
     <link rel="stylesheet" href="/assets/style.css">
     <link rel="icon" type="image/x-icon" href="/assets/imgs/favicon.svg">
 </head>
-<body class="d-flex flex-column bg-body-secondary" style="min-height: 100vh">
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-	<div class="container-lg">
-		<a class="navbar-brand fw-semibold d-flex gap-1" href="/">
-            <img src="/assets/imgs/favicon.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            ApartFinder
-        </a>
-        <button class="border-0 ms-auto bg-body-secondary d-flex justify-content-center align-items-center p-2 rounded-circle" style="margin-right: 10px" id="themeModeBtn">
-            <img src="/assets/imgs/<?=$default_mode?>_mode.svg" alt="mode" width="18px">
-        </button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-				<?php foreach ($navbar as $key => $value): ?>
-                    <li class="nav-item">
-                        <a href="<?= $key ?>"
-                           class="nav-link <?= ($key == $active_uri) ? 'active' : '' ?>"><?= $value ?></a>
-                    </li>
-				<?php endforeach; ?>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        User
-                    </a>
-                    <ul class="dropdown-menu" style="left: -50%">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </ul>
-                </li>
+<body class="d-flex flex-column " style="min-height: 100vh">
+<nav class="navbar navbar-expand-lg" style="border-bottom: 1px solid gray">
+	<div class="container-lg " id="navbar-container">
+
+        <div class="col-2 col-md">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav d-none d-lg-flex">
+                <?php require VIEWS . "/incs/navbar.tpl.php" ?>
             </ul>
         </div>
+
+
+        <div class="col-6 col-md d-flex flex-grow-1 justify-content-sm-center justify-content-end pointer">
+            <a class="navbar-brand fw-semibold d-flex gap-1 align-items-center pointer" href="/" id="logo">
+                <img src="/assets/imgs/favicon.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                ApartFinder
+            </a>
+        </div>
+
+
+        <div class="col-4 col-md d-flex justify-content-end align-items-center">
+            <button class="border-0  bg-body-secondary d-flex justify-content-center align-items-center p-2 rounded-circle" style="margin-right: 0px" id="themeModeBtn">
+                <img src="/assets/imgs/<?=$default_mode?>_mode.svg" alt="mode" width="18px">
+            </button>
+	        <?php if (check_auth()): ?>
+                <div class="dropdown user-dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-item-user">
+                        <div class="custom-profile-pic nav-profile-pic">
+                            <img src="<?= $_SESSION['user']['profile_pic']; ?>" alt="profile-pic">
+                        </div>
+                        <strong style="font-size: 13px" class="d-sm-block d-none"><?= $_SESSION['user']['username'] ?></strong>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end mt-1">
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+	        <?php endif; ?>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mb-lg-0 d-flex align-items-center">
+	            <?php require VIEWS . "/incs/navbar.tpl.php" ?>
+            </ul>
+        </div>
+
+
     </div>
 </nav>

@@ -20,12 +20,7 @@ $avatar_mode = array(
 ?>
 <div class="flex-grow-1">
 	<div class="container-lg">
-        <?php
-            if(isset($_SESSION['register_error'])) {
-                require VIEWS . "/incs/alert_danger.tpl.php";
-                unset($_SESSION['register_error']);
-            }
-        ?>
+        <?php get_alert(); ?>
         <form class="col-lg-6 offset-lg-3 py-4" method="post" enctype="multipart/form-data" action="/register">
             <h1 class="py-3 fw-semibold">Registration</h1>
             <div class="mb-3">
@@ -118,6 +113,7 @@ $avatar_mode = array(
             </div>
 
             <button type="submit" class="btn btn-primary col-12 mb-3" id="register-btn">Register</button>
+            <div class="or">or</div>
             <p class="text-end"><a href="/login" >Already have an account</a></p>
         </form>
 	</div>
