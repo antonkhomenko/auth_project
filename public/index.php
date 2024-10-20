@@ -25,6 +25,7 @@ try {
 	$router->post("/register", "registerPost.php");
 	$router->post("/login", "loginPost.php");
 	$router->get("/logout", "logout.php");
+	$router->get("/profile", "profile.php");
 } catch (Exception $e) {
 	die("can not register new router method: \"{$e->getMessage()}\"");
 }

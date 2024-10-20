@@ -5,13 +5,15 @@
  */
 $active_uri = strtok($_SERVER['REQUEST_URI'], "?");
 $navbar = array(
+	"/" => 'Home',
 	"/login" => 'Login',
 	'/register' => 'Registration',
-	'/secret' => 'FAQ'
 );
 
 $user_navbar = array(
-        "/favorites" => "✧ Favorites",
+        "/" => "⌂ Home",
+        "/favorites" => "♡ Favorites",
+        "/recommended" => "✧ Recommended",
 );
 if (check_auth()) {
     $navbar = $user_navbar;
@@ -48,15 +50,15 @@ $default_mode = $_COOKIE['mode'] ?? 'dark';
 
 
         <div class="col-6 col-md d-flex flex-grow-1 justify-content-sm-center justify-content-end pointer">
-            <a class="navbar-brand fw-semibold d-flex gap-1 align-items-center pointer" href="/" id="logo">
-                <img src="/assets/imgs/favicon.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            <a class="navbar-brand fw-semibold d-flex gap-1 align-items-center pointer" href="/" id="logo" style="line-height: 24px">
+                <img src="/assets/imgs/favicon.svg" alt="Logo" width="30" height="24" class="align-self-top">
                 ApartFinder
             </a>
         </div>
 
 
         <div class="col-4 col-md d-flex justify-content-end align-items-center">
-            <button class="border-0  bg-body-secondary d-flex justify-content-center align-items-center p-2 rounded-circle" style="margin-right: 0px" id="themeModeBtn">
+            <button class="border-0  d-flex justify-content-center align-items-center p-2 rounded-circle" style="margin-right: 0px" id="themeModeBtn">
                 <img src="/assets/imgs/<?=$default_mode?>_mode.svg" alt="mode" width="18px">
             </button>
 	        <?php if (check_auth()): ?>
@@ -68,9 +70,9 @@ $default_mode = $_COOKIE['mode'] ?? 'dark';
                         <strong style="font-size: 13px" class="d-sm-block d-none"><?= $_SESSION['user']['username'] ?></strong>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end mt-1">
-                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li class="dropdown-item-li"><a class="dropdown-item" href="/profile">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li class="dropdown-item-li"><a class="dropdown-item" href="/logout">Logout</a></li>
                     </ul>
                 </div>
 	        <?php endif; ?>
