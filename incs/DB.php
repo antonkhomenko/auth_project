@@ -38,6 +38,32 @@ class DB
 		}
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
+
+	public function delete_user(string $email): bool
+	{
+		$stmt = $this->db->prepare("delete from users where email = ?");
+		return $stmt->execute([$email]);
+	}
+
+	public function get_password(string $email): string
+	{
+		$stmt = $this->db->prepare("select password from users where email = ?");
+		$stmt->execute([$email]);
+		return $stmt->fetchColumn();
+	}
+
+	public function set_new_password(string $email, string $password): bool
+	{
+		$stmt = $this->db->prepare("update users set password = :password where email = :email");
+		return $stmt->execute(['email' => $email, 'password' => $password]);
+	}
+
+	public function update_profile_pic(string $email, string $pic_path): bool
+	{
+		$stmt = $this->db->prepare("update users set profile_pic = ? where email = ?");
+		return $stmt->execute([$pic_path, $email]);
+	}
+
 	protected function prepare_register_data(array $data): array
 	{
 		$result['username'] = h($data['username']);

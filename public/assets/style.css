@@ -246,8 +246,7 @@ body {
 }
 
 .profile-item-label {
-    max-width: 150px;
-    width: 100%;
+    width: 150px;
 }
 
 .profile-item-data {
@@ -291,6 +290,15 @@ body {
     border: 4px solid var(--bs-primary);
 }
 
+.profile-pic-changer-container > input {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    display: none;
+}
+
 #profile-pic-changer-img {
     position: absolute;
     top: 0;
@@ -326,4 +334,9 @@ body {
    .nav-profile-pic {
        margin-right: 0;
    }
+
+    .profile-item-label {
+        /*width: 120px;*/
+        width: 110px;
+    }
 }

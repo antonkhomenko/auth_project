@@ -13,6 +13,19 @@ const passwordInput = Array.from(document.getElementsByClassName("password-input
 const passwordConfirmationInput = document.getElementById("passwordConfirmation");
 const registerBtn = document.getElementById("register-btn");
 
+const newProfilePic = document.getElementById("newProfilePic");
+
+if (newProfilePic !== null) {
+    const profile_pic_changer_img = document.getElementById("profile-pic-changer-img");
+    newProfilePic.addEventListener("change", (event) => {
+        profile_pic_changer_img.src = URL.createObjectURL(event.target.files[0]);
+        profile_pic_changer_img.onload = function() {
+            URL.revokeObjectURL(profile_pic_changer_img.src);
+        }
+    });
+}
+
+
 if (registerBtn !== null) {
     registerBtn.addEventListener("click", (e) => {
         if (passwordConfirmationInput.value !== passwordInput[0].value) {

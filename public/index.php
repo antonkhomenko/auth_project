@@ -26,10 +26,10 @@ try {
 	$router->post("/login", "loginPost.php");
 	$router->get("/logout", "logout.php");
 	$router->get("/profile", "profile.php");
+	$router->post("/profile", "profilePost.php");
 } catch (Exception $e) {
 	die("can not register new router method: \"{$e->getMessage()}\"");
 }
 
 
 $router->match();
-
